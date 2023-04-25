@@ -1,39 +1,33 @@
-{% extends 'index.html' %}
+{% extends 'index.html' %} {% block 'content' %}
 
-{% block 'content' %}
+<div class="main">
+  <input type="checkbox" id="chk" aria-hidden="true" />
 
-{% if page == 'login' %}
-<div>
+
+  <div class="signup">
     <form action="" method="POST">
-        {% csrf_token %}
+      {% csrf_token %}
 
-        <label>Username:</label>
-        <input type="text" name="username" placeholder="Enter username">
+      <label for="chk" aria-hidden="true">Sign up</label>
+      <input type="text" name="txt" placeholder="User name" required="" />
+      <input type="email" name="email" placeholder="Email" required="" />
+      <input type="password" name="pswd" placeholder="Password" required="" />
 
-        <label>Password:</label>
-        <input type="password" name="password">
-
-        <input type="submit" value="Login">
+      <button type="submit">Sign up</button>
     </form>
+  </div>
 
-    <p>Haven't Signed up yet?</p>
-    <a href="{% url 'signup' %}">Sign up</a>
-</div>
 
-{% else %}
 
-<div>
+  <div class="login">
     <form action="" method="POST">
-        {% csrf_token %}
-        
-        {{form.as_p}}
+      {% csrf_token %}
 
-        <input type="submit" value="Sign Up">
+      <label for="chk" aria-hidden="true">Login</label>
+      <input type="text" name="username" placeholder="Enter username" required="" />
+      <input type="password" name="password" placeholder="Password" required="" />
+      <button type="submit">Login</button>
     </form>
-
-    <p>Already Signed up?</p>
-    <a href="{% url 'login' %}">Login</a>
+  </div>
 </div>
-{% endif %}
-
 {% endblock 'content' %}

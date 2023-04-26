@@ -10,45 +10,59 @@ def homePage(request):
     return render(request, 'index.html')
 
 def loginPage(request):
-    page = 'login'
 
+    form = UserCreationForm()
     if request.method == 'POST':
-        username = request.POST.get('username').lower()
-        password = request.POST.get('password')
+        if request.POST.get('submit') == 'Login':
+            username = request.POST.get('username').lower()
+            password = request.POST.get('password')
 
-        try:
-            user = User.objects.get(username=username)
-        except:
-            return HttpResponse("Invalid Username!!")
+            try:
+                user = User.objects.get(username=username)
+            except:
+                return HttpResponse("Invalid Username!!")
         
-        user = authenticate(request, username=username, password=password)
+            user = authenticate(request, username=username, password=password)
 
-        if user is not None:
-            login(request, user)
-            return redirect('home')
-        else:
-            return HttpResponse("Invalid Username or Password!!")
+            if user is not None:
+                login(request, user)
+                return redirect('home')
+            else:
+                return HttpResponse("Invalid Username or Password!!")
+            
+        elif request.POST.get('submit') == 'Signup':
+            form = UserCreationForm(request.POST)
+            if form.is_valid():
+                user = form.save(commit=False)
+                user.username = user.username.lower()
+                user.save()
+                login(request, user)
+                return redirect('home')
+            else:
+                return HttpResponse("An error occured during sign up!!")
+    
+    
 
-    context = {'page': page}
+    context = {'form':form}
     return render(request, 'base/register.html', context)
 
 def logoutPage(request):
     logout(request)
     return redirect('home')
 
-def signupPage(request):
-    form = UserCreationForm()
+# def signupPage(request):
+#     form = UserCreationForm()
 
-    if request.method == 'POST':
-        form = UserCreationForm(request.POST)
-        if form.is_valid():
-            user = form.save(commit=False)
-            user.username = user.username.lower()
-            user.save()
-            login(request, user)
-            return redirect('home')
-        else:
-            return HttpResponse("An error occured during sign up!!")
+#     if request.method == 'POST':
+#         form = UserCreationForm(request.POST)
+#         if form.is_valid():
+#             user = form.save(commit=False)
+#             user.username = user.username.lower()
+#             user.save()
+#             login(request, user)
+#             return redirect('home')
+#         else:
+#             return HttpResponse("An error occured during sign up!!")
 
-    context = {'form': form}
-    return render(request, 'base/register.html', context)
+#     context = {'form': form}
+#     return render(request, 'base/register.html', context)

@@ -12,12 +12,16 @@
 </head>
 
 <body>
-    {% block 'content' %} {% if request.user.is_authenticated %}
-    <p style="background-color: red;">Hello {{request.user}}</p>
+    {% block 'content' %} 
+    
+    {% if request.user.is_authenticated %}
+    <p style="background-color: red;">Hello {{request.user}}</p> <br>
     <a href="{% url 'logout' %}" style="background-color: black;">logout</a>
     {% else %}
     <a href="{% url 'login' %}" style="background-color: black;">login</a>
-    {% endif %} {% endblock 'content' %}
+    {% endif %}
+
+    {% endblock 'content' %}
 </body>
 
 </html>

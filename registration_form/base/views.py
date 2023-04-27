@@ -1,8 +1,9 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth.forms import UserCreationForm
+# from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
+from .forms import SignupForm
 
 # Create your views here.
 
@@ -11,7 +12,7 @@ def homePage(request):
 
 def loginPage(request):
 
-    form = UserCreationForm()
+    form = SignupForm()
     if request.method == 'POST':
         if request.POST.get('submit') == 'Login':
             username = request.POST.get('username').lower()
@@ -31,7 +32,7 @@ def loginPage(request):
                 return HttpResponse("Invalid Username or Password!!")
             
         elif request.POST.get('submit') == 'Signup':
-            form = UserCreationForm(request.POST)
+            form = SignupForm(request.POST)
             if form.is_valid():
                 user = form.save(commit=False)
                 user.username = user.username.lower()

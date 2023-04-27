@@ -88,3 +88,36 @@ button:hover{
 #chk:checked ~ .signup label{
 	transform: scale(.6);
 }
+
+.login-btn {
+	background: #6d44b8;
+	color: white;
+	padding: 15px 32px;
+	text-decoration: none;
+	font-size: 16px;
+	border-radius: 10px;
+	box-shadow: 5px 8px 17px 0px rgba(0,0,0,0.75);
+	font-weight: bold;
+}
+
+.logout-btn {
+	background: white;
+	color: #6d44b8;
+	padding: 15px 32px;
+	text-decoration: none;
+	font-size: 16px;
+	border-radius: 10px;
+	box-shadow: 5px 8px 17px 0px rgba(0,0,0,0.75);
+	font-weight: bold;
+}
+
+.loggedin-user {
+	color: white;
+}
+
+.user-container {
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+	align-items: center;
+}

@@ -15,10 +15,16 @@
     {% block 'content' %} 
     
     {% if request.user.is_authenticated %}
-    <p style="background-color: red;">Hello {{request.user}}</p> <br>
-    <a href="{% url 'logout' %}" style="background-color: black;">logout</a>
+
+    <div class="user-container">
+    <h1 class="loggedin-user">Hello {{request.user}}</h1>
+    <a href="{% url 'logout' %}" class="logout-btn">Logout</a>
+    <div>
+
     {% else %}
-    <a href="{% url 'login' %}" style="background-color: black;">login</a>
+
+    <a href="{% url 'login' %}" class="login-btn">Login</a>
+
     {% endif %}
 
     {% endblock 'content' %}

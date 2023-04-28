@@ -1,9 +1,15 @@
-<h2> Are you sure you want to delete "{{item}}" ?</h2>
 
-<a href="{% url 'home' %}"> Cancel</a>
+    <div class="wrapper">
+        <div class="container">
+        <h2>Are you sure you want to delete {{item}} ?</h2>
 
-<form method="POST" action="">
-    {% csrf_token %}
+        <div class="sub-container">
+            <a href="{% url 'home' %}" class="cancel-button"> Cancel</a>
 
-    <input type="submit" value="Confirm">
-</form>
+            <form method="POST" action="">
+            <input type="submit" value="Confirm" class="confirm-button"/>
+        
+        </form>
+        </div>
+    </div>
+    </div>

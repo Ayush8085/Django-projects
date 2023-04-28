@@ -1,8 +1,12 @@
-<h2> Edit Task </h2>
 
-<form method='POST' action="">
-    {% csrf_token %}
-    {{form}}
 
-    <input type="submit" name="edit">
-</form>
+    <div class="wrapper">
+        <h2 class="edit-task-heading"> Edit Task </h2>
+
+    <form method='POST' action="">
+        {% csrf_token %}
+        {{form}}
+
+        <input type="submit" name="edit" class="submit-button">
+    </form>
+    </div>

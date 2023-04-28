@@ -1,9 +1,28 @@
-<h2> Are you sure you want to delete "{{item}}" ?</h2>
+<!DOCTYPE html>
+<html lang="en">
 
-<a href="{% url 'home' %}"> Cancel</a>
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="delete.css" />
+</head>
 
-<form method="POST" action="">
-    {% csrf_token %}
+<body>
+    <div class="wrapper">
+        <div class="container">
+        <h2>Are you sure you want to delete ?</h2>
 
-    <input type="submit" value="Confirm">
-</form>
+        <div class="sub-container">
+            <a href="{% url 'home' %}" class="cancel-button"> Cancel</a>
+
+            <form method="POST" action="">
+            <input type="submit" value="Confirm" class="confirm-button"/>
+        </div>
+        </form>
+    </div>
+    </div>
+</body>
+
+</html>

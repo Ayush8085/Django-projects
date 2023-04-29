@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib.auth import authenticate, login, logout
-# from django.contrib.auth.forms import UserCreationForm
+from django.contrib import messages
 from django.contrib.auth.models import User
 from .forms import SignupForm
 
@@ -21,7 +21,8 @@ def loginPage(request):
             try:
                 user = User.objects.get(username=username)
             except:
-                return HttpResponse("Invalid Username!!")
+                messages.error(request, 'Invalid Username!!')
+                return redirect('login')
         
             user = authenticate(request, username=username, password=password)
 
@@ -29,7 +30,8 @@ def loginPage(request):
                 login(request, user)
                 return redirect('home')
             else:
-                return HttpResponse("Invalid Username or Password!!")
+                messages.error(request, 'Invalid Username or Password!!')
+                return redirect('login')
             
         elif request.POST.get('submit') == 'Signup':
             form = SignupForm(request.POST)
@@ -40,8 +42,12 @@ def loginPage(request):
                 login(request, user)
                 return redirect('home')
             else:
-                return HttpResponse("An error occured during sign up!!")
-    
+                # messages.error(request, "An error occured during sign up!!")
+                messages.error(request, "Password can’t be too similar to your other personal information.")
+                messages.error(request, "Password must contain at least 8 characters.")
+                messages.error(request, "Password can’t be a commonly used password.")
+                messages.error(request, "Password can’t be entirely numeric.")
+                return redirect('login')
     
 
     context = {'form':form}
@@ -50,20 +56,3 @@ def loginPage(request):
 def logoutPage(request):
     logout(request)
     return redirect('home')
-
-# def signupPage(request):
-#     form = UserCreationForm()
-
-#     if request.method == 'POST':
-#         form = UserCreationForm(request.POST)
-#         if form.is_valid():
-#             user = form.save(commit=False)
-#             user.username = user.username.lower()
-#             user.save()
-#             login(request, user)
-#             return redirect('home')
-#         else:
-#             return HttpResponse("An error occured during sign up!!")
-
-#     context = {'form': form}
-#     return render(request, 'base/register.html', context)
